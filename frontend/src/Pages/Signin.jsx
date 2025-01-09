@@ -9,13 +9,14 @@ const Signin = () => {
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex-col justify-center'>
       <div className='bg-white shadow-md place-self-center my-10 rounded-xl'>
+        <div className='flex flex-col items-center w-80 p-4'>
         <Heading label={"Sign In"}></Heading>
         <SubHeading text={"Enter your credentials to access your account"}></SubHeading>
         <Input title={"Username"} inputPlaceHolder={"Johndoe@example.com"}></Input>
         <Input title={"Password"}></Input>
-        <Button title={"Sign In"}></Button>
-        <LoginSwitch text={"Don't have an account?"} buttonText={"Signup"} path={"/signup"}></LoginSwitch>
-
+        <Button title={"Sign Up"}></Button>
+        <LoginSwitch text={"Don't have an account?"} buttonText={"Signup"} path={"/signup"} ></LoginSwitch>
+        </div>
     </div>
     </div>
 
