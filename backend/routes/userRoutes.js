@@ -139,4 +139,16 @@ router.get("/currentUser",authMiddleware,async(req,res)=>{
     return res.json(user);
 })
 
+router.get("/touser",async(req,res)=>{
+    try{const to=req.query.to;
+    const touser=await User.findOne({_id:to});
+    if(!touser){
+        return res.status(400).json({msg:"User not found"});
+    }
+    return res.json(touser);}
+    catch(err){
+        console.log(err);
+        return res.status(400).json({msg:"error in getting user"});
+    }
+})
 module.exports=router;

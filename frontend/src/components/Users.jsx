@@ -29,7 +29,7 @@ const Users = () => {
             <div key={user._id} className='flex justify-between hover:border-2 border-slate-400'>
                 <div className='flex items-center'>
                     <div className='bg-slate-200 h-9 w-9 rounded-full flex flex-col justify-center items-center'>
-                    <div>{user.firstname[0]}{user.lastname[0]}</div>
+                    <div>{user.firstname[0].toUpperCase()}{user.lastname[0].toUpperCase()}</div>
                     </div>
                     <div className='p-1.5 font-bold'>
                         {user.firstname} {user.lastname}

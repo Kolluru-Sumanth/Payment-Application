@@ -15,12 +15,6 @@ const Signup = () => {
   
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex-col justify-center'>
-      <div>
-      {firstname}
-      {lastname}
-      {username}
-      {password}
-      </div>
       <div className='bg-white shadow-md place-self-center my-10 rounded-xl'>
         <div className='flex flex-col items-center w-80 p-4'>
         <Heading label={"Sign Up"}></Heading>

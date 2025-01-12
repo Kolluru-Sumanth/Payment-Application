@@ -22,7 +22,7 @@ const Appbar = () => {
             <p className='pr-2 pt-1'>Hello,{user.firstname}</p>
             <div className="rounded-full h-8 w-8 bg-slate-200 flex justify-center mt-1 mr-2">
                 <div className="flex flex-col justify-center h-full text-lg">
-                    {user.firstname[0]}{user.lastname[0]}
+                    {user.firstname[0].toUpperCase()}{user.lastname[0].toUpperCase()}
                 </div>
             </div>
         </div>
