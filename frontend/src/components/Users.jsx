@@ -1,28 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './Button'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 const Users = () => {
-    const [users,setUsers]=useState([{
-        firstname:"Kolluru",
-        lastname:"Sumanth",
-        _id:1
-    },{
-        firstname:"Farman",
-        lastname:"Ali",
-        _id:1
-    }])
-
-    const SingleUser=({user})=>{
-        return(
-            <div key={user._id}>
-                {user._id}
-            </div>
-        )
-      }
+    const navigate=useNavigate();
+    const [users,setUsers]=useState([])
+    const [filter,setFilter]=useState('');
+    useEffect(()=>{
+        axios.get("http://localhost:3000/api/v1/user/bulk?filter="+filter,{
+            headers
+            :{
+                'Authorization':localStorage.getItem("token")
+            }
+        }).then((response)=>{
+            console.log(response.data)
+            setUsers(response.data)
+        })
+    }
+    ,[filter]);
 
     return (
     <div className='w-full px-6'>
         <div className='font-bold text-2xl'>Users</div>
-        <input className='w-full p-2 my-3 rounded-sm border' type="text" placeholder='search users...' />
+        <input onChange={(e)=>{
+            setFilter(e.target.value);
+        }} className='w-full p-2 my-3 rounded-sm border' type="text" placeholder='search users...' />
         {users.map((user)=>(
             <div key={user._id} className='flex justify-between hover:border-2 border-slate-400'>
                 <div className='flex items-center'>
@@ -34,7 +36,10 @@ const Users = () => {
                     </div>
                 </div>
                 <div className='pr-3'>
-                <Button title={'Send Money'}></Button>
+                <Button onClick={()=>{
+                    console.log(user);
+                    navigate('/send?to='+user.userId);                    
+                }} title={'Send Money'}></Button>
                 </div>
                 
 

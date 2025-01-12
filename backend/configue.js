@@ -1,3 +1,2 @@
-const JWT_SECRET="PAYTM";
-
-module.exports=JWT_SECRET;
+JWT_SECRET="PAYTM";
+module.exports = JWT_SECRET;

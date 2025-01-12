@@ -4,6 +4,7 @@ const jwt=require('jsonwebtoken');
 const JWT_SECRET = require('../configue');
 const zod=require('zod');
 const { authMiddleware } = require('../middleware');
+const { default: mongoose } = require('mongoose');
 const router=express.Router();
 
 router.post("/signup",async(req,res)=>{
@@ -44,7 +45,7 @@ router.post("/signup",async(req,res)=>{
     
 });
 
-router.get("/signin",(req,res)=>{
+router.post("/signin",(req,res)=>{
     const body=req.body;
     const signinSchema=zod.object({
         username:zod.string().email(),
@@ -52,6 +53,7 @@ router.get("/signin",(req,res)=>{
     })
 
     const result=signinSchema.safeParse(body);
+    console.log(result);
     if(!result.success){
         return res.json({msg:"invalid inputs"}).status(411);
     }
@@ -97,10 +99,10 @@ router.put("/",authMiddleware,(req,res)=>{
 });
 
 router.get("/bulk",authMiddleware,async(req,res)=>{
-    const filter=req.query;
-
+    const filter=req.query.filter;
+    console.log(filter);
     try {
-        const users=User.find({
+        const users=await User.find({
             $or:[{
                 firstname:{
                     "$regex":filter,
@@ -123,8 +125,18 @@ router.get("/bulk",authMiddleware,async(req,res)=>{
     ));
     return res.status(200).json(result);
     } catch (error) {
+        console.log(error);
         return res.status(411).json({msg:"error in filtering users"});
     }    
 });
+
+router.get("/currentUser",authMiddleware,async(req,res)=>{
+    const userId=req.userId;
+    const user= await User.findOne({_id:userId});
+    if (!user){
+        return res.status(400).json({msg:"user not found"});
+    }
+    return res.json(user);
+})
 
 module.exports=router;
