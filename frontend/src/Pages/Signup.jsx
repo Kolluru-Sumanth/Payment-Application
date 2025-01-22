@@ -20,19 +20,15 @@ const Signup = () => {
         <Heading label={"Sign Up"}></Heading>
         <SubHeading text={"Enter your information to create an account"}></SubHeading>
         <Input onchange={e=>{
-          console.log(e)
           SetFirstname(e.target.value)
         }} title={"Firstname"} inputPlaceHolder={"John"}></Input>
         <Input onchange={e=>{
-          console.log(e)
           SetLastname(e.target.value)
         }} title={"Lastname"} inputPlaceHolder={"Doe"}></Input>
         <Input onchange={e=>{
-          console.log(e)
           SetUsername(e.target.value)
         }} title={"Username"} inputPlaceHolder={"Johndoe@example.com"}></Input>
         <Input onchange={e=>{
-          console.log(e)
           SetPassword(e.target.value)
         }} title={"Password"}></Input>
         <Button onClick={async()=>{
@@ -41,7 +37,6 @@ const Signup = () => {
             lastname,
             username,password
           });
-          console.log(response);
           localStorage.setItem("token","Bearer "+ response.data.token)
           navigate("/dashboard")
         }} title={"Sign Up"}></Button>
